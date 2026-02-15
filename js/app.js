@@ -1,0 +1,245 @@
+/**
+ * Presentation Engine — GSAP + Hash Routing
+ * Keyboard nav, staggered reveals, dot sidebar, demo timer.
+ */
+(function () {
+    'use strict';
+
+    // ── DOM ──
+    const track = document.getElementById('deck-track');
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('sidebar-dots');
+    const sidebarFill = document.getElementById('sidebar-fill');
+    const countCurrent = document.getElementById('count-current');
+    const countTotal = document.getElementById('count-total');
+    const totalSlides = slides.length;
+
+    // ── State ──
+    let current = 0;
+    let isTransitioning = false;
+
+    // ── Init ──
+    function init() {
+        countTotal.textContent = totalSlides;
+        buildDots();
+        // Read hash on load
+        const hash = window.location.hash;
+        const match = hash.match(/^#slide-(\d+)$/);
+        if (match) {
+            const idx = parseInt(match[1], 10) - 1;
+            if (idx >= 0 && idx < totalSlides) current = idx;
+        }
+        goTo(current, true);
+        setupKeyboard();
+        setupWheel();
+        setupTouch();
+        setupHashChange();
+    }
+
+    // ── Dots ──
+    function buildDots() {
+        slides.forEach((s, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'sidebar__dot';
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            const tip = document.createElement('span');
+            tip.className = 'sidebar__dot-tip';
+            tip.textContent = s.dataset.title || `Slide ${i + 1}`;
+            dot.appendChild(tip);
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    // ── Navigate ──
+    function goTo(index, instant) {
+        if (!instant && isTransitioning) return;
+        if (index < 0 || index >= totalSlides) return;
+        if (!instant && index === current) return;
+
+        isTransitioning = true;
+        const prev = current;
+        current = index;
+
+        // Animate out previous slide
+        if (!instant && slides[prev]) {
+            animateOut(slides[prev]);
+        }
+
+        // Move track
+        const duration = instant ? 0 : 0.85;
+        gsap.to(track, {
+            x: `-${current * 100}%`,
+            duration,
+            ease: 'expo.out',
+            onComplete: () => {
+                animateIn(slides[current]);
+                isTransitioning = false;
+            }
+        });
+
+        // Update URL hash
+        history.replaceState(null, '', `#slide-${current + 1}`);
+
+        // Update counter
+        countCurrent.textContent = current + 1;
+
+        // Update dots
+        const dots = dotsContainer.querySelectorAll('.sidebar__dot');
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+
+        // Update progress line
+        const progress = totalSlides > 1 ? current / (totalSlides - 1) : 0;
+        sidebarFill.style.height = `${progress * 100}%`;
+
+        // Slide 5 specific — darken bg, start timer
+        handleSlide5(current === 4);
+
+        if (instant) {
+            // On instant load, immediately show elements
+            animateIn(slides[current]);
+            isTransitioning = false;
+        }
+    }
+
+    // ── GSAP Animations ──
+    function animateIn(slide) {
+        // Clear any previous animations on this slide
+        const elements = slide.querySelectorAll('[data-animate]');
+        elements.forEach(el => {
+            gsap.killTweensOf(el);
+        });
+
+        // Title animations — clip / reveal
+        const titles = slide.querySelectorAll('[data-animate="title"]');
+        gsap.fromTo(titles,
+            { opacity: 0, y: 40, skewY: 2 },
+            { opacity: 1, y: 0, skewY: 0, duration: 0.9, ease: 'expo.out', stagger: 0.1 }
+        );
+
+        // Fade animations
+        const fades = slide.querySelectorAll('[data-animate="fade"]');
+        gsap.fromTo(fades,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out', delay: 0.25, stagger: 0.12 }
+        );
+
+        // Stagger list items
+        const staggers = slide.querySelectorAll('[data-animate="stagger"]');
+        gsap.fromTo(staggers,
+            { opacity: 0, x: -20 },
+            { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out', delay: 0.35, stagger: 0.1 }
+        );
+    }
+
+    function animateOut(slide) {
+        const elements = slide.querySelectorAll('[data-animate]');
+        gsap.to(elements, {
+            opacity: 0,
+            duration: 0.3,
+            ease: 'power2.in'
+        });
+    }
+
+    // ── Keyboard ──
+    function setupKeyboard() {
+        document.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'ArrowRight': case 'ArrowDown': case ' ':
+                    e.preventDefault(); goTo(current + 1); break;
+                case 'ArrowLeft': case 'ArrowUp':
+                    e.preventDefault(); goTo(current - 1); break;
+                case 'Home':
+                    e.preventDefault(); goTo(0); break;
+                case 'End':
+                    e.preventDefault(); goTo(totalSlides - 1); break;
+                case 'f': case 'F':
+                    toggleFullscreen(); break;
+            }
+        });
+    }
+
+    // ── Mouse Wheel ──
+    function setupWheel() {
+        let wheelCooldown = false;
+        document.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (wheelCooldown) return;
+            wheelCooldown = true;
+            setTimeout(() => wheelCooldown = false, 900);
+            if (e.deltaY > 0 || e.deltaX > 0) goTo(current + 1);
+            else goTo(current - 1);
+        }, { passive: false });
+    }
+
+    // ── Touch / Swipe ──
+    function setupTouch() {
+        let startX = 0;
+        document.addEventListener('touchstart', (e) => {
+            startX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        document.addEventListener('touchend', (e) => {
+            const diff = startX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 60) {
+                diff > 0 ? goTo(current + 1) : goTo(current - 1);
+            }
+        }, { passive: true });
+    }
+
+    // ── Hash Change ──
+    function setupHashChange() {
+        window.addEventListener('hashchange', () => {
+            const m = window.location.hash.match(/^#slide-(\d+)$/);
+            if (m) {
+                const idx = parseInt(m[1], 10) - 1;
+                if (idx >= 0 && idx < totalSlides && idx !== current) goTo(idx);
+            }
+        });
+    }
+
+    // ── Fullscreen ──
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => { });
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    // ── Slide 5: Demo mode ──
+    let timerInterval = null;
+    function handleSlide5(active) {
+        const timerEl = document.getElementById('timer-display');
+        if (!timerEl) return;
+
+        if (active && !timerInterval) {
+            let seconds = 20 * 60; // 20 min
+            timerEl.textContent = formatTime(seconds);
+            timerInterval = setInterval(() => {
+                seconds--;
+                if (seconds <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    seconds = 0;
+                }
+                timerEl.textContent = formatTime(seconds);
+            }, 1000);
+        } else if (!active && timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }
+
+    function formatTime(s) {
+        const m = Math.floor(s / 60);
+        const sec = s % 60;
+        return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+    }
+
+    // ── Start ──
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vibe Coding — The Era of Personal App Building. By Alejandro De La Mora.">
+    <title>VIBE CODING — The Era of Personal App Building</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Three.js Background -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Minimal Sidebar — Dot Navigation -->
+    <nav id="sidebar" class="sidebar" aria-label="Slide navigation">
+        <div class="sidebar__progress">
+            <div class="sidebar__line"></div>
+            <div class="sidebar__line-fill" id="sidebar-fill"></div>
+        </div>
+        <div class="sidebar__dots" id="sidebar-dots"></div>
+    </nav>
+
+    <!-- Slides Container -->
+    <main class="deck" id="deck">
+        <div class="deck__track" id="deck-track">
+
+            <!-- SLIDE 1: The Hook -->
+            <section class="slide" id="slide-1" data-title="Vibe Coding">
+                <div class="slide__inner slide--center">
+                    <h1 class="slide__hero-title" data-animate="title">VIBE CODING</h1>
+                    <p class="slide__hero-sub" data-animate="fade">The Era of Personal App Building.</p>
+                    <footer class="slide__footer" data-animate="fade">
+                        <span>Alejandro De La Mora</span>
+                        <span class="slide__footer-sep">·</span>
+                        <span>@Oruga</span>
+                    </footer>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: The Shift -->
+            <section class="slide" id="slide-2" data-title="The Shift">
+                <div class="slide__inner slide--split">
+                    <div class="slide__left">
+                        <p class="slide__label" data-animate="fade">01 / THE SHIFT</p>
+                        <h2 class="slide__heading" data-animate="title">From Factory<br>to Kitchen.</h2>
+                        <p class="slide__body" data-animate="fade">Software used to be industrial. Now it's personal.
+                            You don't need a factory to cook a meal. You just need ingredients and intent.</p>
+                    </div>
+                    <div class="slide__right" data-animate="fade">
+                        <div class="slide__visual-morph">
+                            <div class="morph__icon morph__icon--factory" id="morph-factory">
+                                <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M8 72h64M12 72V28l16 12V28l16 12V28h24v44" />
+                                    <rect x="52" y="36" width="8" height="8" rx="1" />
+                                    <rect x="40" y="52" width="8" height="12" rx="1" />
+                                    <path d="M56 16V28M56 16l-4 4M56 16l4 4" />
+                                </svg>
+                                <span class="morph__label">FACTORY</span>
+                            </div>
+                            <div class="morph__arrow">
+                                <svg viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M2 12h36M30 4l8 8-8 8" />
+                                </svg>
+                            </div>
+                            <div class="morph__icon morph__icon--knife" id="morph-knife">
+                                <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 16L60 56" />
+                                    <path d="M60 56l4 4-8 8-4-4" />
+                                    <path d="M20 16c-8 0-8 12 0 12l32 32" />
+                                </svg>
+                                <span class="morph__label morph__label--accent">KITCHEN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: The Mental Stack -->
+            <section class="slide" id="slide-3" data-title="Mental Framework">
+                <div class="slide__inner slide--list">
+                    <p class="slide__label" data-animate="fade">02 / THE MENTAL STACK</p>
+                    <h2 class="slide__heading" data-animate="title">The Mental<br>Framework.</h2>
+                    <ol class="stack-list" id="stack-list">
+                        <li class="stack-list__item" data-animate="stagger">
+                            <span class="stack-list__num">01</span>
+                            <div class="stack-list__content">
+                                <h3>Meta</h3>
+                                <p>What is success?</p>
+                            </div>
+                        </li>
+                        <li class="stack-list__item" data-animate="stagger">
+                            <span class="stack-list__num">02</span>
+                            <div class="stack-list__content">
+                                <h3>Context</h3>
+                                <p>The raw data.</p>
+                            </div>
+                        </li>
+                        <li class="stack-list__item" data-animate="stagger">
+                            <span class="stack-list__num">03</span>
+                            <div class="stack-list__content">
+                                <h3>Rules</h3>
+                                <p>Constraints & Format.</p>
+                            </div>
+                        </li>
+                        <li class="stack-list__item" data-animate="stagger">
+                            <span class="stack-list__num">04</span>
+                            <div class="stack-list__content">
+                                <h3>Examples</h3>
+                                <p>Show, don't just tell.</p>
+                            </div>
+                        </li>
+                        <li class="stack-list__item" data-animate="stagger">
+                            <span class="stack-list__num">05</span>
+                            <div class="stack-list__content">
+                                <h3>Request</h3>
+                                <p>The trigger.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: The Arsenal -->
+            <section class="slide" id="slide-4" data-title="The Arsenal">
+                <div class="slide__inner slide--bento">
+                    <p class="slide__label" data-animate="fade">03 / THE ARSENAL</p>
+                    <h2 class="slide__heading slide__heading--compact" data-animate="title">The Tools.</h2>
+                    <div class="bento" id="bento-grid">
+                        <div class="bento__card bento__card--lg" data-animate="stagger">
+                            <div class="bento__card-inner">
+                                <h3 class="bento__name">Google AI Studio</h3>
+                                <p class="bento__desc">The Brain. 2M Context Window.</p>
+                            </div>
+                        </div>
+                        <div class="bento__card bento__card--md" data-animate="stagger">
+                            <div class="bento__card-inner">
+                                <h3 class="bento__name">Lovable.dev</h3>
+                                <p class="bento__desc">Instant UI. The Face.</p>
+                            </div>
+                        </div>
+                        <div class="bento__card bento__card--md" data-animate="stagger">
+                            <div class="bento__card-inner">
+                                <h3 class="bento__name">Replit</h3>
+                                <p class="bento__desc">The Engine. Backend & Deploy.</p>
+                            </div>
+                        </div>
+                        <div class="bento__card bento__card--sm" data-animate="stagger">
+                            <div class="bento__card-inner">
+                                <h3 class="bento__name">Cursor / Windsurf</h3>
+                                <p class="bento__desc">The Surgical Knife.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: The Live Build -->
+            <section class="slide" id="slide-5" data-title="Let's Build">
+                <div class="slide__inner slide--center">
+                    <h2 class="slide__hero-title slide__hero-title--glow" data-animate="title">Let's Build.</h2>
+                    <div class="demo-timer" id="demo-timer" data-animate="fade">
+                        <span id="timer-display">20:00</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 6: The Colosseum -->
+            <section class="slide" id="slide-6" data-title="Colosseum">
+                <div class="slide__inner slide--center">
+                    <p class="slide__label slide__label--glow" data-animate="fade">THE ARENA</p>
+                    <h2 class="slide__heading slide__heading--cyber" data-animate="title">VIBE CODING<br>COLOSSEUM</h2>
+                    <p class="slide__hero-sub slide__hero-sub--bright" data-animate="fade">Gladiators Wanted.</p>
+                    <p class="slide__body slide__body--center" data-animate="fade">$100 Prize &nbsp;·&nbsp; 30 Minutes
+                        &nbsp;·&nbsp; Pure Flow.</p>
+                    <div class="qr-placeholder" data-animate="fade">
+                        <div class="qr-placeholder__box" id="qr-code">QR</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7: Outro -->
+            <section class="slide" id="slide-7" data-title="Outro">
+                <div class="slide__inner slide--center">
+                    <h2 class="slide__hero-title" data-animate="title">Don't ask for<br>permission.</h2>
+                    <p class="slide__hero-sub slide__hero-sub--bright" data-animate="fade">Just build.</p>
+                    <footer class="slide__footer slide__footer--links" data-animate="fade">
+                        <a href="#" class="slide__link" target="_blank" rel="noopener">LinkedIn ↗</a>
+                        <a href="#" class="slide__link" target="_blank" rel="noopener">Luma ↗</a>
+                    </footer>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Slide count indicator -->
+    <div class="slide-count" id="slide-count">
+        <span id="count-current">1</span><span class="slide-count__sep">/</span><span id="count-total">7</span>
+    </div>
+
+    <!-- Libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- App -->
+    <script src="js/three-bg.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
