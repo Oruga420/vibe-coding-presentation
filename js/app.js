@@ -74,7 +74,7 @@
             duration,
             ease: 'expo.out',
             onComplete: () => {
-                animateIn(slides[current]);
+                if (!instant) animateIn(slides[current]);
                 isTransitioning = false;
             }
         });
