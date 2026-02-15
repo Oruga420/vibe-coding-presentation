@@ -120,33 +120,41 @@
 
         // Title animations — clip / reveal
         const titles = slide.querySelectorAll('[data-animate="title"]');
-        gsap.fromTo(titles,
-            { opacity: 0, y: 40, skewY: 2 },
-            { opacity: 1, y: 0, skewY: 0, duration: 0.9, ease: 'expo.out', stagger: 0.1 }
-        );
+        if (titles.length) {
+            gsap.fromTo(titles,
+                { opacity: 0, y: 40, skewY: 2 },
+                { opacity: 1, y: 0, skewY: 0, duration: 0.9, ease: 'expo.out', stagger: 0.1 }
+            );
+        }
 
         // Fade animations
         const fades = slide.querySelectorAll('[data-animate="fade"]');
-        gsap.fromTo(fades,
-            { opacity: 0, y: 20 },
-            { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out', delay: 0.25, stagger: 0.12 }
-        );
+        if (fades.length) {
+            gsap.fromTo(fades,
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out', delay: 0.25, stagger: 0.12 }
+            );
+        }
 
         // Stagger list items
         const staggers = slide.querySelectorAll('[data-animate="stagger"]');
-        gsap.fromTo(staggers,
-            { opacity: 0, x: -20 },
-            { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out', delay: 0.35, stagger: 0.1 }
-        );
+        if (staggers.length) {
+            gsap.fromTo(staggers,
+                { opacity: 0, x: -20 },
+                { opacity: 1, x: 0, duration: 0.6, ease: 'expo.out', delay: 0.35, stagger: 0.1 }
+            );
+        }
     }
 
     function animateOut(slide) {
         const elements = slide.querySelectorAll('[data-animate]');
-        gsap.to(elements, {
-            opacity: 0,
-            duration: 0.3,
-            ease: 'power2.in'
-        });
+        if (elements.length) {
+            gsap.to(elements, {
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.in'
+            });
+        }
     }
 
     // ── Keyboard ──
