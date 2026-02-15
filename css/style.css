@@ -24,6 +24,21 @@
     --sidebar-w: 48px;
 }
 
+/* ── Light Theme ── */
+[data-theme="light"] {
+    --void: #fafaf9;
+    --surface: rgba(0, 0, 0, 0.03);
+    --surface-hover: rgba(0, 0, 0, 0.06);
+    --border: rgba(0, 0, 0, 0.1);
+    --border-hover: rgba(0, 0, 0, 0.18);
+    --text: #18181b;
+    --text-secondary: #52525b;
+    --text-muted: rgba(0, 0, 0, 0.3);
+    --accent: #4f46e5;
+    --accent-glow: rgba(79, 70, 229, 0.2);
+    --accent-teal: #0d9488;
+}
+
 /* ── Reset ── */
 *,
 *::before,
@@ -161,7 +176,7 @@ button {
     font-weight: 500;
     letter-spacing: .04em;
     color: var(--text-secondary);
-    background: rgba(5, 5, 5, .9);
+    background: var(--void);
     border: 1px solid var(--border);
     padding: 4px 10px;
     border-radius: 4px;
@@ -453,7 +468,7 @@ button {
     border-color: var(--border-hover);
     background: var(--surface-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, .4)
+    box-shadow: 0 8px 40px rgba(0, 0, 0, .12)
 }
 
 .bento__card--lg {

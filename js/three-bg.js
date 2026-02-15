@@ -182,11 +182,29 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Expose for slide-based color shifting
+    // Expose for slide-based color shifting and theme
     window.threeBg = {
         setAccent(hex) {
             mat.uniforms.uColor.value.set(hex);
             particleMat.color.set(hex);
+        },
+        setTheme(theme) {
+            if (theme === 'light') {
+                renderer.setClearColor(0xfafaf9, 1);
+                mat.uniforms.uColor.value.set(0x4f46e5);
+                mat.uniforms.uOpacity.value = 0.12;
+                particleMat.color.set(0x4f46e5);
+                particleMat.opacity = 0.15;
+                particleMat.blending = THREE.NormalBlending;
+            } else {
+                renderer.setClearColor(0x050505, 1);
+                mat.uniforms.uColor.value.set(0x6366f1);
+                mat.uniforms.uOpacity.value = 0.08;
+                particleMat.color.set(0x6366f1);
+                particleMat.opacity = 0.2;
+                particleMat.blending = THREE.AdditiveBlending;
+            }
+            particleMat.needsUpdate = true;
         }
     };
 })();

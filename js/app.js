@@ -34,6 +34,7 @@
         setupWheel();
         setupTouch();
         setupHashChange();
+        setupThemeToggle();
     }
 
     // ── Dots ──
@@ -234,6 +235,38 @@
         const m = Math.floor(s / 60);
         const sec = s % 60;
         return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+    }
+
+    // ── Theme Toggle ──
+    function setupThemeToggle() {
+        const toggle = document.getElementById('theme-toggle');
+        if (!toggle) return;
+
+        // Load saved theme
+        const saved = localStorage.getItem('deck-theme');
+        if (saved === 'light') applyTheme('light');
+
+        toggle.addEventListener('click', () => {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            applyTheme(isLight ? 'dark' : 'light');
+        });
+    }
+
+    function applyTheme(theme) {
+        if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('deck-theme', 'light');
+            // Update Three.js bg
+            if (window.threeBg) {
+                window.threeBg.setTheme('light');
+            }
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('deck-theme', 'dark');
+            if (window.threeBg) {
+                window.threeBg.setTheme('dark');
+            }
+        }
     }
 
     // ── Start ──
