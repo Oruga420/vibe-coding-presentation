@@ -53,14 +53,17 @@
     }
 
     // ── Navigate ──
+    let lastAnimated = -1;
+
     function goTo(index, instant) {
         if (!instant && isTransitioning) return;
         if (index < 0 || index >= totalSlides) return;
-        if (!instant && index === current) return;
+        if (index === current && !instant) return;
 
         isTransitioning = true;
         const prev = current;
         current = index;
+        lastAnimated = -1;
 
         // Animate out previous slide
         if (!instant && slides[prev]) {
@@ -74,7 +77,10 @@
             duration,
             ease: 'expo.out',
             onComplete: () => {
-                if (!instant) animateIn(slides[current]);
+                if (lastAnimated !== current) {
+                    lastAnimated = current;
+                    animateIn(slides[current]);
+                }
                 isTransitioning = false;
             }
         });
@@ -98,6 +104,7 @@
 
         if (instant) {
             // On instant load, immediately show elements
+            lastAnimated = current;
             animateIn(slides[current]);
             isTransitioning = false;
         }
