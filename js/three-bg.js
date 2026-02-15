@@ -11,9 +11,9 @@
 
     // ── Scene Setup ──
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 3.5, 5);
-    camera.lookAt(0, 0, 0);
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 5, 4);
+    camera.lookAt(0, 0, -1);
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -49,9 +49,9 @@
     }
 
     // ── Mesh ──
-    const segments = 80;
-    const geo = new THREE.PlaneGeometry(12, 12, segments, segments);
-    geo.rotateX(-Math.PI / 2.3);
+    const segments = 150;
+    const geo = new THREE.PlaneGeometry(14, 14, segments, segments);
+    geo.rotateX(-Math.PI / 2);
 
     const mat = new THREE.ShaderMaterial({
         wireframe: true,
@@ -72,7 +72,7 @@
             uniform float uOpacity;
             varying float vElevation;
             void main() {
-                float alpha = uOpacity + smoothstep(0.0, 0.5, vElevation) * 0.07;
+                float alpha = uOpacity + smoothstep(0.0, 0.8, vElevation) * 0.12;
                 gl_FragColor = vec4(uColor, alpha);
             }
         `
@@ -146,15 +146,15 @@
         for (let i = 0; i < positions.count; i++) {
             const x = positions.getX(i);
             const z = positions.getZ(i);
-            const n = noise3D(x * 0.3 + clock, z * 0.3 + clock * 0.5, clock * 0.8);
-            positions.setY(i, originalY[i] + n * 0.45);
+            const n = noise3D(x * 0.4 + clock, z * 0.4 + clock * 0.5, clock * 0.8);
+            positions.setY(i, originalY[i] + n * 0.9);
         }
         positions.needsUpdate = true;
 
         // Subtle camera movement based on mouse
-        camera.position.x += (mouseX * 0.3 - camera.position.x) * 0.02;
-        camera.position.y += (3.5 - mouseY * 0.2 - camera.position.y) * 0.02;
-        camera.lookAt(0, 0, 0);
+        camera.position.x += (mouseX * 0.4 - camera.position.x) * 0.02;
+        camera.position.y += (5 - mouseY * 0.3 - camera.position.y) * 0.02;
+        camera.lookAt(0, 0, -1);
 
         // Animate particles slowly upward
         const pp = particles.geometry.attributes.position;
