@@ -404,6 +404,54 @@ button {
     height: 24px
 }
 
+/* ── Social Icons ── */
+.slide__socials {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem
+}
+
+.slide__author {
+    font-size: .85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: .04em
+}
+
+.slide__social-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all .3s var(--ease)
+}
+
+.social-icon:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--accent-glow)
+}
+
+.social-icon svg {
+    width: 16px;
+    height: 16px
+}
+
 /* ── Slide 3: Stack List ── */
 .stack-list {
     display: flex;
