@@ -235,7 +235,7 @@
         if (!digitEls.m1) return;
 
         if (active && !timerInterval) {
-            let seconds = 20 * 60; // 20 min
+            let seconds = 30 * 60; // 30 min
             updateDigits(seconds);
             timerInterval = setInterval(() => {
                 seconds--;
