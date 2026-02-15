@@ -207,15 +207,21 @@
         }
     }
 
-    // ── Slide 5: Demo mode ──
+    // ── Slide 5: Demo mode (Digital Clock) ──
     let timerInterval = null;
+    const digitEls = {
+        m1: document.getElementById('timer-m1'),
+        m2: document.getElementById('timer-m2'),
+        s1: document.getElementById('timer-s1'),
+        s2: document.getElementById('timer-s2')
+    };
+
     function handleSlide5(active) {
-        const timerEl = document.getElementById('timer-display');
-        if (!timerEl) return;
+        if (!digitEls.m1) return;
 
         if (active && !timerInterval) {
             let seconds = 20 * 60; // 20 min
-            timerEl.textContent = formatTime(seconds);
+            updateDigits(seconds);
             timerInterval = setInterval(() => {
                 seconds--;
                 if (seconds <= 0) {
@@ -223,7 +229,7 @@
                     timerInterval = null;
                     seconds = 0;
                 }
-                timerEl.textContent = formatTime(seconds);
+                updateDigits(seconds);
             }, 1000);
         } else if (!active && timerInterval) {
             clearInterval(timerInterval);
@@ -231,10 +237,24 @@
         }
     }
 
-    function formatTime(s) {
-        const m = Math.floor(s / 60);
-        const sec = s % 60;
-        return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+    function updateDigits(totalSec) {
+        const m = Math.floor(totalSec / 60);
+        const s = totalSec % 60;
+        const digits = {
+            m1: String(Math.floor(m / 10)),
+            m2: String(m % 10),
+            s1: String(Math.floor(s / 10)),
+            s2: String(s % 10)
+        };
+        for (const key in digits) {
+            const el = digitEls[key];
+            if (el && el.textContent !== digits[key]) {
+                el.textContent = digits[key];
+                el.classList.remove('flip');
+                void el.offsetWidth; // force reflow
+                el.classList.add('flip');
+            }
+        }
     }
 
     // ── Theme Toggle ──

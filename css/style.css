@@ -604,15 +604,86 @@ button {
     color: #0891b2
 }
 
-/* ── Slide 5: Demo Timer ── */
+/* ── Slide 5: Demo Timer (Digital Clock) ── */
 .demo-timer {
-    margin-top: 2rem;
+    margin-top: 2.5rem
+}
+
+.timer__digits {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center
+}
+
+.timer__digit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(50px, 8vw, 80px);
+    height: clamp(70px, 11vw, 110px);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
     font-family: var(--font);
-    font-size: 1.4rem;
-    font-weight: 300;
-    color: var(--text-muted);
-    letter-spacing: .15em;
-    font-variant-numeric: tabular-nums
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .3s var(--ease)
+}
+
+.timer__digit.flip {
+    animation: digitFlip .35s var(--ease)
+}
+
+@keyframes digitFlip {
+    0% {
+        transform: scaleY(1);
+        opacity: 1
+    }
+
+    40% {
+        transform: scaleY(0) translateY(-10px);
+        opacity: 0.3
+    }
+
+    60% {
+        transform: scaleY(0) translateY(10px);
+        opacity: 0.3
+    }
+
+    100% {
+        transform: scaleY(1);
+        opacity: 1
+    }
+}
+
+.timer__colon {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: var(--accent);
+    padding: 0 2px;
+    animation: colonBlink 1s steps(1) infinite
+}
+
+@keyframes colonBlink {
+
+    0%,
+    100% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: 0.2
+    }
+}
+
+[data-theme="light"] .timer__digit {
+    background: rgba(0, 0, 0, 0.04)
 }
 
 /* ── Slide 6: QR ── */
