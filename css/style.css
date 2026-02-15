@@ -218,6 +218,11 @@ button {
     position: relative
 }
 
+/* Hide animated elements by default — GSAP reveals them */
+[data-animate] {
+    opacity: 0
+}
+
 .slide__inner {
     width: 100%;
     max-width: 1100px;

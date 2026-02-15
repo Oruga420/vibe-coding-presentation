@@ -65,6 +65,14 @@
         current = index;
         lastAnimated = -1;
 
+        // Immediately hide animated elements on the target slide
+        // so they don't flash while the track slides over
+        const nextEls = slides[current].querySelectorAll('[data-animate]');
+        nextEls.forEach(el => {
+            gsap.killTweensOf(el);
+            gsap.set(el, { opacity: 0 });
+        });
+
         // Animate out previous slide
         if (!instant && slides[prev]) {
             animateOut(slides[prev]);
