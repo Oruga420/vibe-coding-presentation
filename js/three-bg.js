@@ -191,10 +191,10 @@
         setTheme(theme) {
             if (theme === 'light') {
                 renderer.setClearColor(0xfafaf9, 1);
-                mat.uniforms.uColor.value.set(0x4f46e5);
-                mat.uniforms.uOpacity.value = 0.12;
-                particleMat.color.set(0x4f46e5);
-                particleMat.opacity = 0.15;
+                mat.uniforms.uColor.value.set(0xc7c7d0);
+                mat.uniforms.uOpacity.value = 0.025;
+                particleMat.color.set(0xa5a5b5);
+                particleMat.opacity = 0.06;
                 particleMat.blending = THREE.NormalBlending;
             } else {
                 renderer.setClearColor(0x050505, 1);
