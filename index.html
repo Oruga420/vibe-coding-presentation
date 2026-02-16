@@ -17,6 +17,20 @@
     <!-- Three.js Background -->
     <canvas id="three-canvas"></canvas>
 
+    <!-- Colosseum Logo — persistent on all slides -->
+    <div class="colosseum-watermark" id="colosseum-watermark">
+        <img src="img/colosseum-logo.png" alt="Vibe Coding Colosseum" class="colosseum-watermark__img">
+    </div>
+
+    <!-- Mobile Swipe Hint -->
+    <div class="swipe-hint" id="swipe-hint">
+        <svg viewBox="0 0 60 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M2 12h56M50 4l8 8-8 8" />
+        </svg>
+        <span>Swipe to navigate</span>
+    </div>
+
     <!-- Minimal Sidebar — Dot Navigation -->
     <nav id="sidebar" class="sidebar" aria-label="Slide navigation">
         <div class="sidebar__progress">
@@ -272,6 +286,19 @@
                     <p class="slide__body slide__body--center" data-animate="fade">
                         The tools are free. The knowledge is everywhere.<br>
                         The only thing between you and your idea is starting.</p>
+
+                    <!-- Partner Logos -->
+                    <div class="partner-logos" data-animate="fade">
+                        <p class="partner-logos__label">IN COLLABORATION WITH</p>
+                        <div class="partner-logos__row">
+                            <img src="img/somos-lit-toronto.png" alt="Somos LIT Toronto"
+                                class="partner-logos__img partner-logos__img--somos">
+                            <img src="img/latinx-in-tech-toronto.jfif" alt="Latinx in Tech Toronto"
+                                class="partner-logos__img partner-logos__img--latinx">
+                        </div>
+                        <p class="partner-logos__thanks">Thank you Somos LIT Toronto for making this happen 🙌</p>
+                    </div>
+
                     <footer class="slide__socials" data-animate="fade">
                         <div class="slide__social-icons">
                             <a href="https://www.instagram.com/oruga_d_karmik/" target="_blank" rel="noopener"

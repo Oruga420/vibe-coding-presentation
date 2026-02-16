@@ -199,6 +199,7 @@
     // ── Touch / Swipe ──
     function setupTouch() {
         let startX = 0;
+        const swipeHint = document.getElementById('swipe-hint');
         document.addEventListener('touchstart', (e) => {
             startX = e.changedTouches[0].screenX;
         }, { passive: true });
@@ -206,6 +207,8 @@
             const diff = startX - e.changedTouches[0].screenX;
             if (Math.abs(diff) > 60) {
                 diff > 0 ? goTo(current + 1) : goTo(current - 1);
+                // Hide swipe hint after first successful swipe
+                if (swipeHint) swipeHint.style.display = 'none';
             }
         }, { passive: true });
     }

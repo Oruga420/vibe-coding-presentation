@@ -880,10 +880,153 @@ button {
     transform: none
 }
 
+/* ── Colosseum Watermark ── */
+.colosseum-watermark {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.5rem;
+    z-index: 90;
+    pointer-events: none;
+    opacity: .6;
+    transition: opacity .3s var(--ease)
+}
+
+.colosseum-watermark__img {
+    width: clamp(50px, 7vw, 80px);
+    height: auto;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .3))
+}
+
+[data-theme="light"] .colosseum-watermark__img {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .1))
+}
+
+/* ── Partner Logos (Outro) ── */
+.partner-logos {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem
+}
+
+.partner-logos__label {
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: var(--text-muted);
+    text-transform: uppercase
+}
+
+.partner-logos__row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.partner-logos__img {
+    height: clamp(36px, 5vw, 55px);
+    width: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    transition: transform .3s var(--ease)
+}
+
+.partner-logos__img:hover {
+    transform: scale(1.05)
+}
+
+.partner-logos__img--somos {
+    /* White logo — add subtle glow in dark mode */
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, .15))
+}
+
+[data-theme="light"] .partner-logos__img--somos {
+    filter: brightness(0) saturate(100%) opacity(.7)
+}
+
+.partner-logos__img--latinx {
+    border-radius: 8px;
+    border: 1px solid var(--border)
+}
+
+.partner-logos__thanks {
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: .02em;
+    margin-top: .3rem
+}
+
+/* ── Mobile Swipe Hint ── */
+.swipe-hint {
+    display: none;
+    position: fixed;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    flex-direction: column;
+    align-items: center;
+    gap: .4rem;
+    color: var(--text-muted);
+    animation: swipeHintPulse 2s ease-in-out infinite, swipeHintFade 4s ease-in forwards;
+    pointer-events: none
+}
+
+.swipe-hint svg {
+    width: 48px;
+    height: 20px
+}
+
+.swipe-hint span {
+    font-size: .65rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase
+}
+
+@keyframes swipeHintPulse {
+
+    0%,
+    100% {
+        transform: translateX(-50%);
+        opacity: .6
+    }
+
+    50% {
+        transform: translateX(-45%);
+        opacity: 1
+    }
+}
+
+@keyframes swipeHintFade {
+
+    0%,
+    70% {
+        visibility: visible
+    }
+
+    100% {
+        visibility: hidden;
+        opacity: 0
+    }
+}
+
 /* ── Responsive ── */
 @media(max-width:768px) {
     :root {
-        --sidebar-w: 36px
+        --sidebar-w: 0px
+    }
+
+    .sidebar {
+        display: none
+    }
+
+    .swipe-hint {
+        display: flex
     }
 
     .slide--split {
@@ -915,7 +1058,65 @@ button {
         transform: rotate(90deg)
     }
 
-    .sidebar__dot-tip {
-        display: none
+    .slide-count {
+        bottom: 1rem;
+        right: 1rem
+    }
+
+    .theme-toggle {
+        left: 1rem;
+        bottom: 1rem
+    }
+
+    .pdf-download {
+        left: 3rem;
+        bottom: 1rem
+    }
+
+    .colosseum-watermark {
+        top: .8rem;
+        right: .8rem
+    }
+
+    .colosseum-watermark__img {
+        width: 40px
+    }
+
+    .partner-logos__row {
+        gap: 1rem
+    }
+
+    .partner-logos__img {
+        height: 32px
+    }
+}
+
+@media(max-width:480px) {
+    .bento {
+        grid-template-columns: 1fr
+    }
+
+    .bento__card--lg,
+    .bento__card--md,
+    .bento__card--sm {
+        grid-column: span 1
+    }
+
+    .slide__hero-title {
+        font-size: clamp(2rem, 10vw, 3.5rem)
+    }
+
+    .slide__heading {
+        font-size: clamp(1.5rem, 7vw, 2.5rem)
+    }
+
+    .timer__digit {
+        width: 40px;
+        height: 56px;
+        font-size: 2.5rem
+    }
+
+    .timer__colon {
+        font-size: 2rem
     }
 }
