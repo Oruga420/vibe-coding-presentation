@@ -19,11 +19,16 @@
         try {
             // Load jsPDF dynamically
             if (!window.jspdf) {
-                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js');
+                try {
+                    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js');
+                } catch (e) {
+                    // Fallback CDN
+                    await loadScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js');
+                }
             }
 
             if (!window.jspdf) {
-                throw new Error('Failed to load jsPDF library');
+                throw new Error('Failed to load jsPDF library. Check your internet connection.');
             }
 
             const { jsPDF } = window.jspdf;
@@ -421,7 +426,8 @@
 
         } catch (err) {
             console.error('PDF generation failed:', err);
-            alert('PDF generation failed. Please try again.\n\nError: ' + err.message);
+            const msg = (err && err.message) ? err.message : String(err);
+            alert('PDF generation failed. Please try again.\n\nError: ' + msg);
         } finally {
             // Always restore the button, even if there was an error
             btn.disabled = false;
@@ -434,7 +440,7 @@
             const s = document.createElement('script');
             s.src = src;
             s.onload = resolve;
-            s.onerror = reject;
+            s.onerror = () => reject(new Error('Failed to load script: ' + src));
             document.head.appendChild(s);
         });
     }
