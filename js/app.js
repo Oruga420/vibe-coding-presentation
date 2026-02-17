@@ -107,8 +107,8 @@
         const progress = totalSlides > 1 ? current / (totalSlides - 1) : 0;
         sidebarFill.style.height = `${progress * 100}%`;
 
-        // Slide 5 specific — darken bg, start timer
-        handleSlide5(current === 4);
+        // Slide 6 specific — darken bg, start timer
+        handleSlide6(current === 5);
 
         if (instant) {
             // On instant load, immediately show elements
@@ -233,7 +233,7 @@
         }
     }
 
-    // ── Slide 5: Demo mode (Digital Clock) ──
+    // ── Slide 6: Demo mode (Digital Clock) ──
     let timerInterval = null;
     const digitEls = {
         m1: document.getElementById('timer-m1'),
@@ -242,7 +242,7 @@
         s2: document.getElementById('timer-s2')
     };
 
-    function handleSlide5(active) {
+    function handleSlide6(active) {
         if (!digitEls.m1) return;
 
         if (active && !timerInterval) {

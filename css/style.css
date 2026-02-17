@@ -1025,6 +1025,116 @@ button {
     }
 }
 
+/* ── Visual: Stacking vs Chaining ── */
+.method-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem;
+    border-left: 1px solid var(--border);
+}
+
+.method-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.method-row--dim {
+    opacity: 0.4;
+}
+
+.method-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+}
+
+.method-label--accent {
+    color: var(--accent);
+}
+
+/* Chaining Animation (Horizontal) */
+.chain-flow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chain-node {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid var(--text-secondary);
+}
+
+.chain-line {
+    height: 1px;
+    width: 40px;
+    background: var(--border);
+}
+
+/* Stacking Animation (Vertical) */
+.stack-visual {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 6px;
+    width: 220px;
+}
+
+.stack-layer {
+    height: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-radius: 4px;
+    transition: all 0.3s var(--ease);
+}
+
+/* Gradient effect for the stack layers */
+.layer-1 {
+    border-left: 2px solid #52525b;
+}
+
+.layer-2 {
+    border-left: 2px solid #a1a1aa;
+}
+
+.layer-3 {
+    border-left: 2px solid #6366f1;
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.layer-4 {
+    border-left: 2px solid #818cf8;
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.layer-5 {
+    border-left: 2px solid #2dd4bf;
+    background: rgba(45, 212, 191, 0.15);
+    color: #2dd4bf;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+}
+
+/* Hover effect on stack */
+.stack-visual:hover .stack-layer {
+    transform: translateX(5px);
+}
+
+.stack-visual:hover .layer-5 {
+    transform: translateX(10px);
+    box-shadow: 0 0 15px rgba(45, 212, 191, 0.2);
+}
+
 /* ── Responsive ── */
 @media(max-width:768px) {
     :root {
@@ -1062,6 +1172,15 @@ button {
 
     .slide__visual-morph {
         flex-direction: column
+    }
+
+    .method-visual {
+        border-left: none;
+        padding: 1rem 0;
+    }
+
+    .stack-visual {
+        width: 100%;
     }
 
     .morph__arrow svg {
