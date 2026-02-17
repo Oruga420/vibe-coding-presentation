@@ -144,65 +144,108 @@
                 </div>
             </section>
 
-            <!-- SLIDE 3: The Mental Stack -->
-            <section class="slide" id="slide-3" data-title="Mental Framework">
+            <!-- SLIDE 3: Context Stacking (Theory/Visual) -->
+            <section class="slide" id="slide-3" data-title="Context Stacking">
+                <div class="slide__inner slide--split">
+                    <div class="slide__left">
+                        <p class="slide__label" data-animate="fade">02 / THE METHOD</p>
+                        <h2 class="slide__heading" data-animate="title">Context Stacking<br><span
+                                style="opacity:0.3">vs. Chaining.</span></h2>
+                        <p class="slide__body" data-animate="fade">
+                            Most people use "Chaining": Input A → Output B → Input C. This creates drift and
+                            hallucinations.
+                        </p>
+                        <p class="slide__body" data-animate="fade">
+                            Pros use <strong>Context Stacking</strong>. We build a semantic fortress—layer by
+                            layer—<em>before</em> we ask for a single line of code.
+                            <br><br>
+                            Don't drip-feed the AI. Overload the buffer.
+                        </p>
+                    </div>
+                    <div class="slide__right" data-animate="fade">
+                        <div class="method-visual">
+                            <div class="method-row method-row--dim">
+                                <span class="method-label">CHAINING</span>
+                                <div class="chain-flow">
+                                    <div class="chain-node"></div>
+                                    <div class="chain-line"></div>
+                                    <div class="chain-node"></div>
+                                    <div class="chain-line"></div>
+                                    <div class="chain-node"></div>
+                                </div>
+                            </div>
+                            <div class="method-row">
+                                <span class="method-label method-label--accent">STACKING</span>
+                                <div class="stack-visual">
+                                    <div class="stack-layer layer-1">Meta</div>
+                                    <div class="stack-layer layer-2">Context</div>
+                                    <div class="stack-layer layer-3">Rules</div>
+                                    <div class="stack-layer layer-4">Examples</div>
+                                    <div class="stack-layer layer-5 layer--trigger">Action</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: The Stack (5 Layers Execution) -->
+            <section class="slide" id="slide-4" data-title="The Stack">
                 <div class="slide__inner slide--list">
-                    <p class="slide__label" data-animate="fade">02 / THE MENTAL STACK</p>
-                    <h2 class="slide__heading" data-animate="title">The Mental<br>Framework.</h2>
+                    <p class="slide__label" data-animate="fade">03 / THE EXECUTION</p>
+                    <h2 class="slide__heading" data-animate="title">The 5 Layers.</h2>
+                    <p class="slide__hero-sub" data-animate="fade" style="margin-bottom: 2rem;">
+                        Build this prompt structure every single time.
+                    </p>
                     <ol class="stack-list" id="stack-list">
                         <li class="stack-list__item" data-animate="stagger">
-                            <span class="stack-list__num">01</span>
+                            <span class="stack-list__num">L1</span>
                             <div class="stack-list__content">
-                                <h3>Meta — Define success first</h3>
-                                <p>Before typing anything, decide what a perfect output looks like.
-                                    "Build me a website" is weak. "Build a SaaS landing page with dark mode,
-                                    pricing tiers, and a waitlist form" is powerful.</p>
+                                <h3>Meta — The Definition of Success</h3>
+                                <p>Define the persona and the goal. "You are a Senior System Architect. The goal is to
+                                    build a scalable customized LMS."</p>
                             </div>
                         </li>
                         <li class="stack-list__item" data-animate="stagger">
-                            <span class="stack-list__num">02</span>
+                            <span class="stack-list__num">L2</span>
                             <div class="stack-list__content">
-                                <h3>Context — Feed it everything</h3>
-                                <p>Upload your docs, brand guidelines, existing code, and references.
-                                    The more context the AI has, the better the output.
-                                    This is where Google AI Studio's 2M token window shines.</p>
+                                <h3>Context — The Raw Data</h3>
+                                <p>Dump the specs. Upload the PDF manuals, the brand guidelines, the database schema.
+                                    "Here is the documentation for the API we are using."</p>
                             </div>
                         </li>
                         <li class="stack-list__item" data-animate="stagger">
-                            <span class="stack-list__num">03</span>
+                            <span class="stack-list__num">L3</span>
                             <div class="stack-list__content">
-                                <h3>Rules — Set boundaries</h3>
-                                <p>"Use TypeScript." "Follow REST conventions." "No inline styles."
-                                    Rules prevent hallucinations and keep the AI on track.
-                                    Think of them as guardrails, not limitations.</p>
+                                <h3>Rules — The Constraints</h3>
+                                <p>Non-negotiables. "Use TypeScript. No inline styles. Dark mode first. Prefer
+                                    functional composition over inheritance."</p>
                             </div>
                         </li>
                         <li class="stack-list__item" data-animate="stagger">
-                            <span class="stack-list__num">04</span>
+                            <span class="stack-list__num">L4</span>
                             <div class="stack-list__content">
-                                <h3>Examples — Show, don't tell</h3>
-                                <p>Include 2-3 examples of what you want. Paste a JSON sample,
-                                    a code snippet, or a paragraph in your desired style.
-                                    Examples are the strongest signal you can give an AI.</p>
+                                <h3>Examples — The Style Match (Few-Shot)</h3>
+                                <p>Show, don't tell. Paste a snippet of code or text that represents "Perfect". "Output
+                                    the code following this exact pattern:"</p>
                             </div>
                         </li>
                         <li class="stack-list__item" data-animate="stagger">
-                            <span class="stack-list__num">05</span>
+                            <span class="stack-list__num" style="color:var(--accent-teal)">L5</span>
                             <div class="stack-list__content">
-                                <h3>Request — Pull the trigger</h3>
-                                <p>Only now make your actual ask. Be direct and actionable:
-                                    "Generate the React component for the pricing section
-                                    based on the above context, rules, and examples."</p>
+                                <h3 style="color:var(--accent-teal)">The Request — The Trigger</h3>
+                                <p>Only now do you ask. Short and direct. "Based on the stack above, generate the auth
+                                    middleware."</p>
                             </div>
                         </li>
                     </ol>
                 </div>
             </section>
 
-            <!-- SLIDE 4: The Arsenal -->
-            <section class="slide" id="slide-4" data-title="The Arsenal">
+            <!-- SLIDE 5: The Arsenal -->
+            <section class="slide" id="slide-5" data-title="The Arsenal">
                 <div class="slide__inner slide--bento">
-                    <p class="slide__label" data-animate="fade">03 / THE ARSENAL</p>
+                    <p class="slide__label" data-animate="fade">04 / THE ARSENAL</p>
                     <h2 class="slide__heading slide__heading--compact" data-animate="title">The Tools.</h2>
                     <div class="bento" id="bento-grid">
                         <div class="bento__card bento__card--lg bento__card--green" data-animate="stagger">
@@ -239,8 +282,8 @@
                 </div>
             </section>
 
-            <!-- SLIDE 5: The Live Build -->
-            <section class="slide" id="slide-5" data-title="Let's Build">
+            <!-- SLIDE 6: The Live Build -->
+            <section class="slide" id="slide-6" data-title="Let's Build">
                 <div class="slide__inner slide--center">
                     <p class="slide__label slide__label--glow" data-animate="fade">LIVE DEMO</p>
                     <h2 class="slide__hero-title slide__hero-title--glow" data-animate="title">Let's Build.</h2>
@@ -258,8 +301,8 @@
                 </div>
             </section>
 
-            <!-- SLIDE 6: The Colosseum -->
-            <section class="slide" id="slide-6" data-title="Colosseum">
+            <!-- SLIDE 7: The Colosseum -->
+            <section class="slide" id="slide-7" data-title="Colosseum">
                 <div class="slide__inner slide--center">
                     <p class="slide__label slide__label--glow" data-animate="fade">THE ARENA</p>
                     <h2 class="slide__heading slide__heading--cyber" data-animate="title">VIBE CODING<br>COLOSSEUM</h2>
@@ -278,8 +321,8 @@
                 </div>
             </section>
 
-            <!-- SLIDE 7: Outro -->
-            <section class="slide" id="slide-7" data-title="Outro">
+            <!-- SLIDE 8: Outro -->
+            <section class="slide" id="slide-8" data-title="Outro">
                 <div class="slide__inner slide--center">
                     <h2 class="slide__hero-title" data-animate="title">Don't ask for<br>permission.</h2>
                     <p class="slide__hero-sub slide__hero-sub--bright" data-animate="fade">Just build.</p>
@@ -375,7 +418,7 @@
 
     <!-- Slide count indicator -->
     <div class="slide-count" id="slide-count">
-        <span id="count-current">1</span><span class="slide-count__sep">/</span><span id="count-total">7</span>
+        <span id="count-current">1</span><span class="slide-count__sep">/</span><span id="count-total">8</span>
     </div>
 
     <!-- Libs -->
