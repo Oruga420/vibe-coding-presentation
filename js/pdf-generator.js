@@ -66,9 +66,10 @@
                 doc.setFontSize(size);
                 doc.setTextColor(...color);
                 const lines = doc.splitTextToSize(text, contentW);
-                checkPage(size * 0.5 * lines.length + 4);
+                const lineH = size * 0.6;
+                checkPage(lineH * lines.length + 6);
                 doc.text(lines, margin, y || currentY);
-                currentY = (y || currentY) + (size * 0.45) * lines.length + 2;
+                currentY = (y || currentY) + lineH * lines.length + 4;
             }
 
             function body(text, y) {
@@ -76,17 +77,18 @@
                 doc.setFontSize(10);
                 doc.setTextColor(...gray);
                 const lines = doc.splitTextToSize(text, contentW);
-                checkPage(lines.length * 4.5 + 2);
+                checkPage(lines.length * 5 + 4);
                 doc.text(lines, margin, y || currentY);
-                currentY = (y || currentY) + lines.length * 4.5 + 2;
+                currentY = (y || currentY) + lines.length * 5 + 4;
             }
 
             function label(text) {
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(7);
                 doc.setTextColor(...accent);
+                checkPage(10);
                 doc.text(text.toUpperCase(), margin, currentY);
-                currentY += 5;
+                currentY += 7;
             }
 
             function accentLine() {
@@ -111,26 +113,29 @@
             }
 
             function bulletPoint(title, desc) {
-                checkPage(14);
+                const descLines = desc ? doc.splitTextToSize(desc, contentW - 5) : [];
+                const needed = 8 + (descLines.length * 4.8) + 6;
+                checkPage(needed);
                 doc.setFillColor(...accent);
                 doc.circle(margin + 1.5, currentY - 1.2, 1, 'F');
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(10);
                 doc.setTextColor(...white);
                 doc.text(title, margin + 5, currentY);
-                currentY += 5;
+                currentY += 6;
                 if (desc) {
                     doc.setFont('helvetica', 'normal');
                     doc.setFontSize(9);
                     doc.setTextColor(...gray);
-                    const lines = doc.splitTextToSize(desc, contentW - 5);
-                    doc.text(lines, margin + 5, currentY);
-                    currentY += lines.length * 4 + 3;
+                    doc.text(descLines, margin + 5, currentY);
+                    currentY += descLines.length * 4.8 + 5;
                 }
             }
 
             function numberedItem(num, title, desc) {
-                checkPage(16);
+                const descLines = desc ? doc.splitTextToSize(desc, contentW - 12) : [];
+                const needed = 10 + (descLines.length * 4.8) + 6;
+                checkPage(needed);
                 // Number badge
                 doc.setFillColor(30, 30, 40);
                 doc.roundedRect(margin, currentY - 4, 8, 6, 1, 1, 'F');
@@ -143,15 +148,14 @@
                 doc.setFontSize(10);
                 doc.setTextColor(...white);
                 doc.text(title, margin + 12, currentY);
-                currentY += 5;
+                currentY += 6;
                 // Desc
                 if (desc) {
                     doc.setFont('helvetica', 'normal');
                     doc.setFontSize(9);
                     doc.setTextColor(...gray);
-                    const lines = doc.splitTextToSize(desc, contentW - 12);
-                    doc.text(lines, margin + 12, currentY);
-                    currentY += lines.length * 4 + 4;
+                    doc.text(descLines, margin + 12, currentY);
+                    currentY += descLines.length * 4.8 + 6;
                 }
             }
 
